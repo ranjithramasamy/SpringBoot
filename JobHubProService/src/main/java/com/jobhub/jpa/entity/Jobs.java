@@ -7,13 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "t_jobs")
-@NamedQuery(name = "fetchMatchingJobs", query = "select j.id, j.skills, j.availability, j.postedOn, j.jobDesc, j.tags from Jobs j")
 public class Jobs {
 	@Id
 	@GeneratedValue

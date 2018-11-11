@@ -7,20 +7,20 @@ public class MatchedJob {
     private String jobLocation;
     private String employer;
     private String jobType;
-	private String skills;
+	private String[] skills;
 	private String availability;
 	private Date postedOn;
 	private String wagePerHour;
 	private String jobDesc;
-	private String tags;
+	private String[] tags;
 	private String rating;
 	
 	public MatchedJob() {
 		super();
 	}
 
-	public MatchedJob(Long jobId, String jobLocation, String employer, String jobType, String skills, String availability,
-			Date postedOn, String wagePerHour, String jobDesc, String tags, String rating) {
+	public MatchedJob(Long jobId, String jobLocation, String employer, String jobType, String[] skills, String availability,
+			Date postedOn, String wagePerHour, String jobDesc, String[] tags, String rating) {
 		super();
 		this.jobId = jobId;
 		this.jobLocation = jobLocation;
@@ -67,11 +67,11 @@ public class MatchedJob {
 		this.jobType = jobType;
 	}
 
-	public String getSkills() {
+	public String[] getSkills() {
 		return skills;
 	}
 
-	public void setSkills(String skills) {
+	public void setSkills(String[] skills) {
 		this.skills = skills;
 	}
 
@@ -107,11 +107,11 @@ public class MatchedJob {
 		this.jobDesc = jobDesc;
 	}
 
-	public String getTags() {
+	public String[] getTags() {
 		return tags;
 	}
 
-	public void setTags(String tags) {
+	public void setTags(String[] tags) {
 		this.tags = tags;
 	}
 
