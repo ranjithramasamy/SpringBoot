@@ -1,4 +1,4 @@
-package com.jobhub.model;
+package com.jobhub.jpa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,33 +6,36 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_job_types")
-public class JobTypes {
+@Table(name = "t_skills")
+public class Skills {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String jobType;
+	private String desc;
 	
-	public JobTypes() {
+	public Skills() {
 		super();
 	}
 	
-	public JobTypes(Long id, String jobType) {
+	public Skills(Long id, String desc) {
 		super();
 		this.id = id;
-		this.jobType = jobType;
+		this.desc = desc;
 	}
 	
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getJobType() {
-		return jobType;
+
+	public String getDesc() {
+		return desc;
 	}
-	public void setJobType(String type) {
-		this.jobType = type;
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }
