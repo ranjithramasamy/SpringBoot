@@ -22,14 +22,12 @@ public class JobsSpecification {
 			@Override
             public Predicate toPredicate(Root<Jobs> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 final List<Predicate> predicateList = new ArrayList<>();
-                Predicate predicate = null;
-                
+
                 //If filter criteria presents then keyword will be ignored.
                 if (!StringUtils.isEmpty(searchCriteria.getAvailability()) || !StringUtils.isEmpty(searchCriteria.getJobType()) 
                 		|| !StringUtils.isEmpty(searchCriteria.getSkills())) {
-                	if (!StringUtils.isEmpty(searchCriteria.getAvailability())) {
-                        final Predicate availabilityPredicate = cb.equal(root.get("availability"), searchCriteria.getAvailability());
-                        predicateList.add(availabilityPredicate);
+                	if (!StringUtils.isEmpty(searchCriteria.getAvailability())) {                   
+                        predicateList.add(getCompositePredicates(root, cb, "availability", searchCriteria.getAvailability()));
                     }
                     
                     if (!StringUtils.isEmpty(searchCriteria.getJobType())) {
@@ -37,26 +35,44 @@ public class JobsSpecification {
                         predicateList.add(jobTypePredicate);
                     }
                     
-                    if (!StringUtils.isEmpty(searchCriteria.getSkills())) {
-                        final Predicate skillsPredicate = cb.like(cb.lower(root.get("skills")), "%" + searchCriteria.getSkills().toLowerCase() + "%");
-                        predicateList.add(skillsPredicate);
-                    }
-                    
-                    predicate = cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
+                    if (!StringUtils.isEmpty(searchCriteria.getSkills())) {                      
+                        predicateList.add(getCompositePredicates(root, cb, "skills", searchCriteria.getSkills().toLowerCase()));
+                    }                    
                 }else {
                 	if (!StringUtils.isEmpty(searchCriteria.getKeyword())) {
-                        final Predicate keywordPredicate = cb.like(cb.lower(root.get("skills")), "%" + searchCriteria.getKeyword().toLowerCase() + "%");
-                        predicateList.add(keywordPredicate);
-                        
-                        final Predicate jobTypePredicate = cb.like(cb.lower(root.get("jobTypes").get("jobType")), "%" + searchCriteria.getKeyword().toLowerCase() + "%");
-                        predicateList.add(jobTypePredicate);
-                        
-                        predicate = cb.or(predicateList.toArray(new Predicate[predicateList.size()]));
+                        predicateList.add(getPredicatesForKeyword(root, cb, searchCriteria.getKeyword().toLowerCase()));
                     }
                 }
                 
+                Predicate predicate = cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
+                
                 return predicate;
-            }	
+            }
+			
+			private Predicate getCompositePredicates(Root<Jobs> root, CriteriaBuilder cb, String searchKey, String searchValue) {
+				String[] keys = searchValue.split(",");
+        		final List<Predicate> skillsPredicateList = new ArrayList<>();
+        		
+        		for(String key : keys) {
+        			skillsPredicateList.add(cb.like(cb.lower(root.get(searchKey)), "%" + key + "%"));
+        		}
+        		
+                return cb.or(skillsPredicateList.toArray(new Predicate[] {}));             
+			}
+			
+			private Predicate getPredicatesForKeyword(Root<Jobs> root, CriteriaBuilder cb, String searchValue) {
+				String[] keys = searchValue.split(",");
+        		final List<Predicate> keywordPredicateList = new ArrayList<>();
+        		
+        		for(String key : keys) {
+        			keywordPredicateList.add(cb.like(cb.lower(root.get("skills")), "%" + key + "%"));
+        			keywordPredicateList.add(cb.like(cb.lower(root.get("jobTypes").get("jobType")), "%" + key + "%"));
+        			keywordPredicateList.add(cb.like(cb.lower(root.get("jobLocation").get("employer").get("name")), "%" + key + "%"));
+        			keywordPredicateList.add(cb.like(cb.lower(root.get("jobLocation").get("location")), "%" + key + "%"));
+        		}
+        		
+                return cb.or(keywordPredicateList.toArray(new Predicate[] {}));             
+			}
         };
     }
 

@@ -12,7 +12,6 @@ public class MatchedJob {
 	private Date postedOn;
 	private String wagePerHour;
 	private String jobDesc;
-	private String[] tags;
 	private String rating;
 	
 	public MatchedJob() {
@@ -20,7 +19,7 @@ public class MatchedJob {
 	}
 
 	public MatchedJob(Long jobId, String jobLocation, String employer, String jobType, String[] skills, String availability,
-			Date postedOn, String wagePerHour, String jobDesc, String[] tags, String rating) {
+			Date postedOn, String wagePerHour, String jobDesc, String rating) {
 		super();
 		this.jobId = jobId;
 		this.jobLocation = jobLocation;
@@ -31,7 +30,6 @@ public class MatchedJob {
 		this.postedOn = postedOn;
 		this.wagePerHour = wagePerHour;
 		this.jobDesc = jobDesc;
-		this.tags = tags;
 		this.rating = rating;
 	}
 
@@ -106,15 +104,7 @@ public class MatchedJob {
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
 	}
-
-	public String[] getTags() {
-		return tags;
-	}
-
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
-
+	
 	public String getRating() {
 		return rating;
 	}

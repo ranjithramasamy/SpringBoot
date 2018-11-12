@@ -54,7 +54,6 @@ public class HomeServiceImpl implements HomeService {
 		List<MatchedJob> formattedJobsList = new ArrayList<>();
 		
 		for(Jobs job: matchedJobsList) {
-			String[] tags = job.getTags().split("\\|", -1);
 			String[] skills = job.getSkills().split("\\|", -1);
 			String availability = "hourly";
 			
@@ -64,7 +63,7 @@ public class HomeServiceImpl implements HomeService {
 			
 			MatchedJob matchedJob = new MatchedJob(job.getId(), job.getJobLocation().getLocation(), 
 					job.getJobLocation().getEmployer().getName(), job.getJobTypes().getJobType(), skills, availability, 
-					job.getPostedOn(), job.getWagePerHour(), job.getJobDesc(), tags, job.getJobLocation().getEmployer().getRating());
+					job.getPostedOn(), job.getWagePerHour(), job.getJobDesc(), job.getJobLocation().getEmployer().getRating());
 			
 			formattedJobsList.add(matchedJob);
 		}

@@ -37,14 +37,12 @@ public class Jobs {
 	@Column(name="job_desc")
 	private String jobDesc;
 	
-	private String tags;
-	
 	public Jobs() {
 		super();
 	}
 
 	public Jobs(Long id, JobLocation jobLocation, JobTypes jobTypes, String skills, String availability, Date postedOn,
-			String wagePerHour, String jobDesc, String tags) {
+			String wagePerHour, String jobDesc) {
 		super();
 		this.id = id;
 		this.jobLocation = jobLocation;
@@ -54,7 +52,6 @@ public class Jobs {
 		this.postedOn = postedOn;
 		this.wagePerHour = wagePerHour;
 		this.jobDesc = jobDesc;
-		this.tags = tags;
 	}
 
 	public Long getId() {
@@ -119,13 +116,5 @@ public class Jobs {
 
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
-	}
-
-	public String getTags() {
-		return tags;
-	}
-
-	public void setTags(String tags) {
-		this.tags = tags;
 	}
 }
