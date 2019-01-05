@@ -21,8 +21,8 @@ import com.jobhub.service.HomeService;
 @RestController
 @RequestMapping("/v1/api")
 public class HomeController {
-	 @Autowired
-	 private HomeService homeService;
+	@Autowired
+	private HomeService homeService;
 	
 	@GetMapping("/jobtypes")
 	public ResponseEntity<List<JobTypes>> getJobTypes() {
