@@ -17,7 +17,7 @@ import com.jobhub.model.SearchCriteria;
 import com.jobhub.model.SearchResult;
 import com.jobhub.service.HomeService;
 
-@CrossOrigin(origins = "http://localhost:8000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/v1/api")
 public class HomeController {
