@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+
+  job-hub-pro-backend:
+    container_name: job-hub-pro-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: job-hub-pro-backend:prod
+    ports:
+      - '8080:8080'

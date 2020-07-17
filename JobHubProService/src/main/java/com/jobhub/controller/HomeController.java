@@ -2,7 +2,6 @@ package com.jobhub.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,25 +15,29 @@ import com.jobhub.jpa.entity.Skills;
 import com.jobhub.model.SearchCriteria;
 import com.jobhub.model.SearchResult;
 import com.jobhub.service.HomeService;
+import com.jobhub.constants.GlobalConstants;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3001")
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping(GlobalConstants.REST_CONTROLLER_ROOT_PATH)
 public class HomeController {
-	@Autowired
-	private HomeService homeService;
-	
-	@GetMapping("/jobtypes")
+	private final HomeService homeService;
+
+	public HomeController(HomeService homeService){
+		this.homeService = homeService;
+	}
+
+	@GetMapping(GlobalConstants.FETCH_JOB_TYPES_PATH)
 	public ResponseEntity<List<JobTypes>> getJobTypes() {
 		return new ResponseEntity<List<JobTypes>>(homeService.getAllJobTypes(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/skills")
+	@GetMapping(GlobalConstants.FETCH_SKILLS_PATH)
 	public ResponseEntity<List<Skills>> getSkills() {
 		return new ResponseEntity<List<Skills>>(homeService.getAllSkills(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/search")
+	@GetMapping(GlobalConstants.JOB_SEARCH_PATH)
 	public ResponseEntity<SearchResult> searchJobs(@ModelAttribute SearchCriteria searchCriteria) {
 		return new ResponseEntity<SearchResult>(homeService.searchJobs(searchCriteria), HttpStatus.OK);
 	}
