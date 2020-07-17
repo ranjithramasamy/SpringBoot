@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.jobhub.JobHubServiceConstants;
+import com.jobhub.constants.JobHubServiceConstants;
 import com.jobhub.jpa.entity.JobTypes;
 import com.jobhub.jpa.entity.Jobs;
 import com.jobhub.jpa.entity.Skills;
