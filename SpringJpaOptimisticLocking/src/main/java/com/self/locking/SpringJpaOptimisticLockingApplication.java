@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.self.locking.jpa.entity.Books;
 import com.self.locking.jpa.repository.BooksRepository;
+import com.self.locking.runner.CreateBooksRunner;
 import com.self.locking.service.BooksService;
 
 @SpringBootApplication

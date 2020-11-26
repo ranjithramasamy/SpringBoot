@@ -1,4 +1,4 @@
-package com.self.locking;
+package com.self.locking.runner;
 
 import com.self.locking.service.BooksService;
 
@@ -8,7 +8,7 @@ public class CreateBooksRunner implements Runnable {
 	private final Double price;
 	private final BooksService booksService;
 
-	CreateBooksRunner(Integer bookId, Double price, BooksService booksService) {
+	public CreateBooksRunner(Integer bookId, Double price, BooksService booksService) {
 		this.bookId = bookId;
 		this.price = price;
 		this.booksService = booksService;
