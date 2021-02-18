@@ -3,6 +3,7 @@ package com.self.batchinsert.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import static com.self.batchinsert.constants.GlobalConstants.MSG_USER_CREATION_SUCCESSFUL;
@@ -12,7 +13,8 @@ import com.self.batchinsert.repository.UserRepository;
 
 @Service
 public class UserService {
-  private static final int BATCH_SIZE = 1000;
+  @Value("${spring.jpa.properties.hibernate.jdbc.batch_size}")
+  private int BATCH_SIZE;
   private final UserRepository userRepository;
 
   public UserService(UserRepository userRepository) {
