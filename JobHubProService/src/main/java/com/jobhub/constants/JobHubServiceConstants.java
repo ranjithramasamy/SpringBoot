@@ -7,7 +7,7 @@ public class JobHubServiceConstants {
 	public static final String FETCH_SKILLS_PATH = "/skills";
 	public static final String JOB_SEARCH_PATH = "/search";
 
-	public static final String CORS_WHITE_LISTED_DOMAINS = "http://localhost:3001";
+	public static final String CORS_WHITE_LISTED_DOMAINS = "http://localhost:3000";
 
 	public static final String SORT_BY_POSTED_DT = "postedOn";
 }
