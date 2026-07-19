@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+app:
+  kafka:
+    bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
+    topicName: intraday-trade
+    producer:
+      acks: all
+      batch-size: 65536
+      linger-ms: 10
+      compression-type: lz4
