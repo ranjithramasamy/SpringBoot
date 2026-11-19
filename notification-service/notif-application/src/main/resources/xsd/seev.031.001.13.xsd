@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:iso:std:iso:20022:tech:xsd:seev.031.001.13"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:iso:std:iso:20022:tech:xsd:seev.031.001.13"
+           elementFormDefault="qualified">
+
+    <xs:element name="Document" type="Document"/>
+
+    <xs:complexType name="Document">
+        <xs:sequence>
+            <xs:element name="CorpActnNtfctn" type="CorpActnNtfctnType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CorpActnNtfctnType">
+        <xs:sequence>
+            <xs:element name="NtfctnGnlInf" type="NtfctnGnlInfType"/>
+            <xs:element name="UndrlygScty" type="UndrlygSctyType"/>
+            <xs:element name="CorpActnGnlDtls" type="CorpActnGnlDtlsType"/>
+            <xs:element name="RateAndAmtDtls" type="RateAndAmtDtlsType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NtfctnGnlInfType">
+        <xs:sequence>
+            <xs:element name="NtfctnId" type="xs:string"/>
+            <xs:element name="NtfctnTp" type="CodeType"/>
+            <xs:element name="CorpActnEvtId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="UndrlygSctyType">
+        <xs:sequence>
+            <xs:element name="FinInstrmId" type="FinInstrmIdType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FinInstrmIdType">
+        <xs:sequence>
+            <xs:element name="ISIN" type="xs:string" minOccurs="0"/>
+            <xs:element name="OthrId" type="OtherIdType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OtherIdType">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CorpActnGnlDtlsType">
+        <xs:sequence>
+            <xs:element name="EvtTp" type="CodeType"/>
+            <xs:element name="MndtryVlntryTp" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RateAndAmtDtlsType">
+        <xs:sequence>
+            <xs:element name="GrssDvdndRate" type="AmountType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CodeType">
+        <xs:sequence>
+            <xs:element name="Cd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AmountType">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="Ccy" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

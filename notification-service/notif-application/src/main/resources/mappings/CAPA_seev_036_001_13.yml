@@ -1,0 +1,27 @@
+targetNamespace: "urn:iso:std:iso:20022:tech:xsd:seev.036.001.13"
+root:
+  name: "Document"
+  children:
+    - name: "CorpActnMvmntPrlimryAdvc"
+      children:
+        - name: "MvmntPrlimryAdvcGnlInf"
+          children:
+            - name: "Tp"
+              value: "'NEWM'"
+            - name: "CorpActnEvtId"
+              valueFrom: "details.ca_number"
+        - name: "AcctDtls"
+          children:
+            - name: "SfkpgAcct"
+              valueFrom: "security.safekeeping_account"
+        - name: "CorpActnMvmntDtls"
+          children:
+            - name: "OptnNb"
+              valueFrom: "movement.option_number"
+            - name: "CshMvmntDtls"
+              when: "#root['movement'] != null and #root['movement']['entitled_amount'] > 0"
+              children:
+                - name: "PstngAmt"
+                  valueFrom: "movement.entitled_amount"
+                  attributes:
+                    Ccy: "movement.currency"

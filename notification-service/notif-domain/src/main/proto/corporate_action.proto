@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package com.abc.sid.notifsrvc.domain.proto;
+
+option java_multiple_files = true;
+option java_package = "com.abc.sid.notifsrvc.domain.proto";
+option java_outer_classname = "CorporateActionProto";
+
+message CorporateActionEvent {
+  string message_id = 1;
+  string event_id = 2;
+  string message_type = 3;      // CANO, CAPA, CACO, etc.
+  string message_version = 4;   // 1.0, 2.0, etc.
+  string workflow_status = 5;   // NEWM, AMND, REPL, CANC
+  SecurityDetails security = 6;
+  CorporateActionDetails details = 7;
+  RateDetails rates = 8;
+  MovementDetails movement = 9;
+  EnrichmentData enrichment = 10;
+}
+
+message SecurityDetails {
+  string isin = 1;
+  string local_id = 2;
+  string safekeeping_account = 3;
+  string description = 4;
+}
+
+message CorporateActionDetails {
+  string ca_number = 1;
+  string event_type_code = 2;     // DVCA, INTR, REDM, etc.
+  string mandatory_voluntary = 3; // MAND, VOLU, CHOS
+  string payment_date = 4;
+}
+
+message RateDetails {
+  double gross_dividend_rate = 1;
+  double withholding_tax_rate = 2;
+  string currency = 3;
+}
+
+message MovementDetails {
+  string option_number = 1;
+  string option_type = 2;
+  double entitled_amount = 3;
+  string currency = 4;
+  string value_date = 5;
+}
+
+message EnrichmentData {
+  string sender_bic = 1;
+  string receiver_bic = 2;
+  string depository_code = 3;
+}

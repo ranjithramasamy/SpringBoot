@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:iso:std:iso:20022:tech:xsd:seev.036.001.13"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:iso:std:iso:20022:tech:xsd:seev.036.001.13"
+           elementFormDefault="qualified">
+
+    <xs:element name="Document" type="Document"/>
+
+    <xs:complexType name="Document">
+        <xs:sequence>
+            <xs:element name="CorpActnMvmntPrlimryAdvc" type="CorpActnMvmntPrlimryAdvcType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CorpActnMvmntPrlimryAdvcType">
+        <xs:sequence>
+            <xs:element name="MvmntPrlimryAdvcGnlInf" type="GnlInfType"/>
+            <xs:element name="AcctDtls" type="AcctDtlsType"/>
+            <xs:element name="CorpActnMvmntDtls" type="MvmntDtlsType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GnlInfType">
+        <xs:sequence>
+            <xs:element name="Tp" type="xs:string"/>
+            <xs:element name="CorpActnEvtId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AcctDtlsType">
+        <xs:sequence>
+            <xs:element name="SfkpgAcct" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MvmntDtlsType">
+        <xs:sequence>
+            <xs:element name="OptnNb" type="xs:string"/>
+            <xs:element name="CshMvmntDtls" type="CshMvmntDtlsType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CshMvmntDtlsType">
+        <xs:sequence>
+            <xs:element name="PstngAmt" type="AmountType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AmountType">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="Ccy" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: notification-service
+  datasource:
+    url: jdbc:h2:mem:notifdb;MODE=Oracle;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  sql:
+    init:
+      mode: always
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-service-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+    listener:
+      ack-mode: manual_immediate
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+
+app:
+  s3:
+    bucket-name: ${METADATA_S3_BUCKET:corp-actions-metadata}
+    region: ${AWS_REGION:ap-south-1}
+    client-enabled: false
+    local-fallback-enabled: true
+  kafka:
+    consumer:
+      enabled: false
+    producer:
+      enabled: false
+    topics:
+      incoming: corp-actions.incoming.v1
+      outgoing: corp-actions.outgoing.swift.v1

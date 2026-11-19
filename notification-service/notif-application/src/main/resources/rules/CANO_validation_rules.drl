@@ -1,0 +1,34 @@
+package com.abc.sid.notifsrvc.rules.cano;
+
+import com.abc.sid.notifsrvc.domain.proto.CorporateActionEvent;
+global java.util.List violations;
+
+rule "CANO-001: Validate ISIN Format (ISO 6166)"
+    when
+        $evt : CorporateActionEvent(
+            security.isin != null && security.isin != "",
+            !security.isin.matches("^[A-Z]{2}[A-Z0-9]{9}[0-9]$")
+        )
+    then
+        violations.add("CANO-001: Invalid ISIN format [" + $evt.getSecurity().getIsin() + "]");
+end
+
+rule "CANO-002: Require Either ISIN or Local Security ID"
+    when
+        $evt : CorporateActionEvent(
+            (security.isin == null || security.isin == "") &&
+            (security.localId == null || security.localId == "")
+        )
+    then
+        violations.add("CANO-002: Either security.isin or security.local_id must be provided");
+end
+
+rule "CANO-003: Positive Dividend Rate Required for Cash Dividend (DVCA)"
+    when
+        $evt : CorporateActionEvent(
+            details.eventTypeCode == "DVCA",
+            rates.grossDividendRate <= 0.0
+        )
+    then
+        violations.add("CANO-003: Gross dividend rate must be > 0 for DVCA events");
+end

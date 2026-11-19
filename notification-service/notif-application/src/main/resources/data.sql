@@ -1,0 +1,21 @@
+INSERT INTO CA_TRANSFORMATION_PROFILE (
+    PROFILE_ID, MESSAGE_TYPE, MESSAGE_VERSION, TARGET_ISO_TYPE,
+    MAPPING_S3_KEY, RULES_S3_KEY, XSD_S3_KEY, ACTIVE_FLAG
+) VALUES (
+    'PROF-CANO-V1', 'CANO', '1.0', 'seev.031.001.13',
+    'mappings/CANO_seev_031_001_13.yml',
+    'rules/CANO_validation_rules.drl',
+    'xsd/seev.031.001.13.xsd',
+    1
+);
+
+INSERT INTO CA_TRANSFORMATION_PROFILE (
+    PROFILE_ID, MESSAGE_TYPE, MESSAGE_VERSION, TARGET_ISO_TYPE,
+    MAPPING_S3_KEY, RULES_S3_KEY, XSD_S3_KEY, ACTIVE_FLAG
+) VALUES (
+    'PROF-CAPA-V1', 'CAPA', '1.0', 'seev.036.001.13',
+    'mappings/CAPA_seev_036_001_13.yml',
+    'rules/CAPA_validation_rules.drl',
+    'xsd/seev.036.001.13.xsd',
+    1
+);

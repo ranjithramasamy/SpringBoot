@@ -1,0 +1,53 @@
+targetNamespace: "urn:iso:std:iso:20022:tech:xsd:seev.031.001.13"
+root:
+  name: "Document"
+  children:
+    - name: "CorpActnNtfctn"
+      children:
+        - name: "NtfctnGnlInf"
+          children:
+            - name: "NtfctnId"
+              valueFrom: "message_id"
+            - name: "NtfctnTp"
+              children:
+                - name: "Cd"
+                  switch:
+                    - when: "#root['workflow_status'] == 'REPL'"
+                      value: "'REPL'"
+                    - when: "#root['workflow_status'] == 'AMND'"
+                      value: "'AMND'"
+                    - default: "'NEWM'"
+            - name: "CorpActnEvtId"
+              valueFrom: "details.ca_number"
+
+        - name: "UndrlygScty"
+          children:
+            - name: "FinInstrmId"
+              children:
+                - name: "ISIN"
+                  when: "#root['security']['isin'] != null and #root['security']['isin'] != ''"
+                  valueFrom: "security.isin"
+                - name: "OthrId"
+                  when: "(#root['security']['isin'] == null or #root['security']['isin'] == '') and #root['security']['local_id'] != null and #root['security']['local_id'] != ''"
+                  children:
+                    - name: "Id"
+                      valueFrom: "security.local_id"
+
+        - name: "CorpActnGnlDtls"
+          children:
+            - name: "EvtTp"
+              children:
+                - name: "Cd"
+                  valueFrom: "details.event_type_code"
+            - name: "MndtryVlntryTp"
+              valueFrom: "details.mandatory_voluntary"
+
+        - name: "RateAndAmtDtls"
+          children:
+            - name: "GrssDvdndRate"
+              when: "#root['details']['event_type_code'] == 'DVCA' and #root['rates'] != null and #root['rates']['gross_dividend_rate'] > 0"
+              children:
+                - name: "Amt"
+                  valueFrom: "rates.gross_dividend_rate"
+                  attributes:
+                    Ccy: "rates.currency"

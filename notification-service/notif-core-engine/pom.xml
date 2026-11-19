@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.abc.sid.notifsrvc</groupId>
+        <artifactId>notification-service</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>notif-core-engine</artifactId>
+    <name>Notification Service - Core Transformation Engine</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.abc.sid.notifsrvc</groupId>
+            <artifactId>notif-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.abc.sid.notifsrvc</groupId>
+            <artifactId>notif-domain</artifactId>
+        </dependency>
+
+        <!-- Drools Rules Engine -->
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-mvel</artifactId>
+        </dependency>
+
+        <!-- Woodstox StAX & SnakeYAML -->
+        <dependency>
+            <groupId>com.fasterxml.woodstox</groupId>
+            <artifactId>woodstox-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
+
+        <!-- Caffeine Cache -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+    </dependencies>
+</project>

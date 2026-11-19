@@ -1,0 +1,22 @@
+package com.abc.sid.notifsrvc.rules.capa;
+
+import com.abc.sid.notifsrvc.domain.proto.CorporateActionEvent;
+global java.util.List violations;
+
+rule "CAPA-001: Safekeeping Account Required"
+    when
+        $evt : CorporateActionEvent(
+            security.safekeepingAccount == null || security.safekeepingAccount == ""
+        )
+    then
+        violations.add("CAPA-001: security.safekeeping_account is mandatory for CAPA");
+end
+
+rule "CAPA-002: Entitled Amount Must Be Positive"
+    when
+        $evt : CorporateActionEvent(
+            movement.entitledAmount <= 0.0
+        )
+    then
+        violations.add("CAPA-002: movement.entitled_amount must be > 0");
+end
